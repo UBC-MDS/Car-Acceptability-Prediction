@@ -16,9 +16,9 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
 # Dependencies
 
 * Python 3.10.6 and Python Packages:
-    ** docopt-ng                 0.8.1 
-    ** requests                  2.28.1 
-    ** pandas                    1.5.1
-    ** altair                    4.2.0 
-    ** altair_data_server        0.4.1
-    ** sklearn                   1.1.3
+    * Sub docopt-ng                 0.8.1 
+    * Sub requests                  2.28.1 
+    * Sub pandas                    1.5.1
+    * Sub altair                    4.2.0 
+    * Sub altair_data_server        0.4.1
+    * Sub sklearn                   1.1.3
