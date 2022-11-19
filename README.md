@@ -25,11 +25,9 @@ Next we will begin pre-processing and data cleaning our training data by creatin
 
 We will share the results of our analysis via the following: After selecting our optimal model, we will use the pipe line created above to re-run these on our test dataset and then analyze the scores from the prediction. We will once again review and present the classification metrics using tables and graphs and and decide if our model is good enough to use on deployment data. 
 
-# License
-
-The Car Popularity Predictor materials here are licensed under [Creative Commons Attribution 4.0 Canada License (CC BY 4.0 CA).](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode) 
 
 
+# Usage
 Note: Make sure have the necessary dependencies installed for your conda environment.
 
 1. Using `docopt` in Python to download data file from external URL 
@@ -52,3 +50,7 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
     *  altair                    4.2.0 
     *  altair_data_server        0.4.1
     *  sklearn                   1.1.3
+
+# License
+
+The Car Popularity Predictor materials here are licensed under [Creative Commons Attribution 4.0 Canada License (CC BY 4.0 CA).](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode) 
