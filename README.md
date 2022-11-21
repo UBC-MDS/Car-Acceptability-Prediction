@@ -45,7 +45,12 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
 `python src/data_processing.py --raw_data_path='data/raw/raw_data.csv' --clean_data_folder_path='data/processed'`
 
 4. For eda plotting of training data, run the following command at the root directory.
+
 `python src/eda_car_popularity.py --training_data_path='data/processed/training.csv' --plot_result_path='result/car_popularity_eda.png'`
+
+4. For machine learning analysis for traning data, run the following command at the root directory.
+
+`python src/car_classifier_analysis.py --training_data_path='data/processed/training.csv' --result_folder_path='result'`
 
 # Dependencies
 
@@ -57,6 +62,7 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
     *  altair_data_server        0.4.1
     *  sklearn                   1.1.3
     *  altair_saver              0.5.0
+    *  joblib                    1.2.0
 
 # License
 
