@@ -23,11 +23,12 @@ def main(raw_data_path, clean_data_folder_path):
     except Exception as req:
         print("The raw data file path does not exist, check again")
         print(req)
+    # split training/test data with reproducibility
     train_df, test_df = train_test_split(data, test_size=0.10, random_state=522)
     write_to_csv(train_df, clean_data_folder_path+'/training.csv')
     write_to_csv(test_df, clean_data_folder_path+'/test.csv')
 
-# 
+# function for writing csv file to given folder path
 def write_to_csv(df, file_path):
     try:
         df.to_csv(file_path, index = False)
