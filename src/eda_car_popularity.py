@@ -46,4 +46,4 @@ def main(training_data_path, plot_result_path):
     
 
 if __name__ == "__main__":
-    main(opt["--training_data_path"], opt["--training_data_path"])
+    main(opt["--training_data_path"], opt["--plot_result_path"])
