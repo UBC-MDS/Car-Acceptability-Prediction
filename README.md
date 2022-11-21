@@ -48,7 +48,7 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
 
 `python src/eda_car_popularity.py --training_data_path='data/processed/training.csv' --plot_result_path='result/car_popularity_eda.png'`
 
-4. For machine learning analysis for traning data, run the following command at the root directory.
+5. For machine learning analysis for traning data, run the following command at the root directory.
 
 `python src/car_classifier_analysis.py --training_data_path='data/processed/training.csv' --result_folder_path='result'`
 
