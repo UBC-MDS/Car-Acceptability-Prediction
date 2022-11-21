@@ -40,6 +40,10 @@ To proceed, run the following command at the command line and set root directory
 
 To proceed, open and run "src/car_popularity_analysis.ipynb"
 
+3. For processing raw data, run the following command at the root directory.
+
+`python src/data_processing.py --raw_data_path='data/raw/raw_data.csv' --clean_data_folder_path='data/processed'`
+
 
 # Dependencies
 
