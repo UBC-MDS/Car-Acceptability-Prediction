@@ -54,6 +54,8 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
 
 # Dependencies
 
+The conda environment, called `env522car.yaml`, can be found in the root directory.
+
 * Python 3.10.6 and Python Packages:
     *  docopt-ng                 0.8.1 
     *  requests                  2.28.1 
