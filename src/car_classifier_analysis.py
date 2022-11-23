@@ -3,10 +3,10 @@
 (muti classififer tuning)(hyperparameter tuning) (final model fitting),
 then save the tables/model to the result folder.
 
-Usage: src/eda_car_popularity.py --training_data_path=<training_data_path> --result_folder_path=<result_folder_path>
+Usage: src/car_classifier_analysis.py --train_test_folder_path=<train_test_folder_path> --result_folder_path=<result_folder_path>
 
 Options: 
---training_data_path=<training_data_path> The path the the csv file contianing training data
+--train_test_folder_path=<train_test_folder_path> The path to the csv files contianing training and testing data
 --result_folder_path=<result_folder_path> The path to store the analysis results
 '''
 
@@ -23,20 +23,27 @@ from sklearn.model_selection import cross_val_score, cross_validate
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.compose import ColumnTransformer, make_column_transformer
 from sklearn.model_selection import RandomizedSearchCV
+
 opt = docopt(__doc__)
 
-def main(training_data_path, result_folder_path):
+def main(train_test_folder_path, result_folder_path):
     try:
         # read data and add column names 
-        train_df = pd.read_csv(training_data_path)
+        train_df = pd.read_csv(train_test_folder_path+'/training.csv')
     except Exception as req:
         print("The training data file path does not exist, check again")
+        print(req)
+
+    try:
+        # read data and add column names 
+        test_df = pd.read_csv(train_test_folder_path+'/test.csv')
+    except Exception as req:
+        print("The test data file path does not exist, check again")
         print(req)
     
     # pre_processing -----------------------------------------------------------
     # list features for different transformations
-    ordinal_features = ['buying', 'maint', 'persons', 'lug_boot', 'safety']
-    drop_features = ['doors']
+    ordinal_features = ['buying', 'maint', 'persons', 'lug_boot', 'safety', 'doors']
     target = "class"
 
     # set ordinal levels 
@@ -44,21 +51,20 @@ def main(training_data_path, result_folder_path):
     person_level = ['2', '4', 'more']
     lug_level = ['small', 'med', 'big']
     safety_level = ['low' , 'med', 'high']
+    doors_level = ['2', '3', '4', '5more']
 
     # separate target and input features
     X_train = train_df.drop(columns=[target])
     y_train = train_df[target]
 
-    # separate target and input features
-    X_train = train_df.drop(columns=[target])
-    y_train = train_df[target]
+    X_test = test_df.drop(columns=[target])
+    y_test = test_df[target]
 
-    # create processor
-    ordinal_transformer = OrdinalEncoder(categories=[buying_maint_level,buying_maint_level,
-        person_level,lug_level,safety_level], dtype=int)
+    # create preprocessor
+    ordinal_transformer = OrdinalEncoder(categories=[buying_maint_level, buying_maint_level,
+        person_level, lug_level, safety_level, doors_level], dtype=int)
     preprocessor = make_column_transformer(
-    ("drop", drop_features),
-    (ordinal_transformer, ordinal_features))
+        (ordinal_transformer, ordinal_features))
 
     # this can be used in literate documents
     # data = preprocessor.fit_transform(X_train)
@@ -67,48 +73,57 @@ def main(training_data_path, result_folder_path):
     # classifier tuning -----------------------------------------------------------
     # list different classifiers
     models = {
-    "dummy": DummyClassifier(random_state = 522),
-    "decision tree": DecisionTreeClassifier(random_state=522),
-    "random forest": RandomForestClassifier(random_state=522),
-    "naive bayes": MultinomialNB()}
+        "dummy": DummyClassifier(random_state = 522),
+        "decision tree": DecisionTreeClassifier(random_state=522),
+        "random forest": RandomForestClassifier(random_state=522),
+        "naive bayes": MultinomialNB()}
     
     # classifier tuning, we use `balanced_accuracy` as our scoring metric 
-    muti_model_results_df = classifier_tunning(models,preprocessor,X_train,y_train)
+    multi_model_results_df = classifier_tunning(models, preprocessor, X_train, y_train)
+
     # this can be used in literate documents
-    # print(muti_model_results_df)
+    # print(multi_model_results_df)
     # save table as csv file 
-    write_to_csv(muti_model_results_df, result_folder_path+'/car_classifier_tuning_analysis.csv')
-    # hyperparameter tunning------------------------------------------------------------
+    write_to_csv(multi_model_results_df, result_folder_path+'/car_classifier_tuning_analysis.csv')
+
+    # hyperparameter tunning--------------------------------------------------------
     # create pipeline for random forest hyperparameter tunning 
     pipe_rf = Pipeline([
-    ("process", preprocessor),
-    ("rf", RandomForestClassifier(random_state = 522))])
+        ("process", preprocessor),
+        ("rf", RandomForestClassifier(random_state = 522))])
+
     # create hyperparameter grid 
     param_dist = {
-    "rf__n_estimators": range(10,71,1),
-    "rf__max_depth": range(3,20,1),}
+        "rf__n_estimators": range(5,71,1),
+        "rf__max_depth": range(3,20,1),}
+
     # hyperparameter optimization
-    random_search_result = hyperparameter_tuning(pipe_rf, param_dist,X_train,y_train)
+    random_search_result = hyperparameter_tuning(pipe_rf, param_dist, X_train, y_train)
     # this can be used in literate documents
     # print(random_search_result.head(5))
+
     # save table as csv file 
     write_to_csv(random_search_result, result_folder_path+'/car_hyperparameter_tuning_analysis.csv')
 
     # final model-----------------------------------------------------------------
-    best_n_estimators, best_max_depth = 57, 8
+    best_n_estimators, best_max_depth = random_search_result.loc[1,'param_rf__n_estimators'], random_search_result.loc[1,'param_rf__max_depth']
     final_model = make_pipeline(preprocessor,  RandomForestClassifier(random_state=522, 
         n_estimators= best_n_estimators, max_depth= best_max_depth))
     final_model.fit(X_train, y_train)
-    # save final model as joblib 
-    try:
-        joblib.dump(final_model, result_folder_path+"/final_model.joblib")
-    except:
-        os.makedirs(os.path.dirname(result_folder_path))
-        joblib.dump(final_model, result_folder_path+"/final_model.joblib")
     
+    # scoring the model & saving the output
 
+    try:
+        with open(result_folder_path+'/final_model_score.txt', 'w') as f:
+            print("Test score: %0.4f" % final_model.score(X_test, y_test), file=f)   
+    except:
+        os.makedirs(os.path.dirname(result_folder_path))        
+        with open(result_folder_path+'/final_model_score.txt', 'w') as f:
+            print("Test score: %0.4f" % final_model.score(X_test, y_test), file=f)     
 
-
+    # save final model as joblib 
+    joblib.dump(final_model, result_folder_path+"/final_model.joblib")
+    
 
 
 
@@ -132,7 +147,7 @@ def mean_std_cross_val_scores(model, X_train, y_train, **kwargs):
         pandas Series with mean scores from cross_validation
     """
 
-    scores = cross_validate(model, X_train, y_train,scoring = "balanced_accuracy", **kwargs)
+    scores = cross_validate(model, X_train, y_train, scoring = "balanced_accuracy", **kwargs)
 
     mean_scores = pd.DataFrame(scores).mean()
     std_scores = pd.DataFrame(scores).std()
@@ -143,19 +158,19 @@ def mean_std_cross_val_scores(model, X_train, y_train, **kwargs):
 
     return pd.Series(data=out_col, index=mean_scores.index)
 
-def classifier_tunning(models,preprocessor,X_train,y_train):
+def classifier_tunning(models, preprocessor, X_train, y_train):
     results_dict = {}
-    muti_model_results_df = None 
+    multi_model_results_df = None 
     for model_name, model in models.items():
         pipe = make_pipeline(preprocessor, model)
         results_dict[model_name] = mean_std_cross_val_scores(
             pipe, X_train, y_train, cv=5, return_train_score=True
         )
-    muti_model_results_df = pd.DataFrame(results_dict).T
+    multi_model_results_df = pd.DataFrame(results_dict).T
 
-    return muti_model_results_df
+    return multi_model_results_df
 
-def hyperparameter_tuning(pipe_rf, param_dist,X_train,y_train):
+def hyperparameter_tuning(pipe_rf, param_dist, X_train, y_train):
     # Random search of parameters, using 5 fold cross validation, 
     # search across 100 different combinations
     random_search = RandomizedSearchCV(pipe_rf, param_dist, cv=5, 
@@ -172,7 +187,6 @@ def hyperparameter_tuning(pipe_rf, param_dist,X_train,y_train):
     return random_search_result
 
 
-
 # function for writing csv file to given folder path
 def write_to_csv(df, file_path):
     try:
@@ -182,7 +196,5 @@ def write_to_csv(df, file_path):
         df.to_csv(file_path, index = False)
 
 
-
-
 if __name__ == "__main__":
-    main(opt["--training_data_path"], opt["--result_folder_path"])
+    main(opt["--train_test_folder_path"], opt["--result_folder_path"])
