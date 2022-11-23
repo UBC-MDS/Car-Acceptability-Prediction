@@ -60,9 +60,22 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
     *  pandas                    1.5.1
     *  altair                    4.2.0 
     *  altair_data_server        0.4.1
-    *  sklearn                   1.1.3
-    *  altair_saver              0.5.0
     *  joblib                    1.2.0
+    *  matplotlib                >=3.2.2
+    *  jsonschema                4.16
+    *  selenium                  <4.3.0
+    *  eli5
+    *  shap
+    *  imbalanced-learn
+    *  lightgbm
+    *  pip
+    *  jinja2
+    *  ipykernel
+    *  altair_saver
+    *  python-graphviz
+    *  graphviz
+    *  scikit-learn              
+    *  altair_saver              
 
 # License
 
