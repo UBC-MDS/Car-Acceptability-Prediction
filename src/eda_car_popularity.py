@@ -57,6 +57,7 @@ def main(training_data_path, folder_result_path):
     #Export plot 2:
     plot_save(dist_plot, "/eda_plot2_dist.png", folder_result_path)
 
+
 #Function to output the plot in the folder_results_path
 def plot_save(plot, filename:str, folder_path):
     png_data = vlc.vegalite_to_png(plot.to_dict())
