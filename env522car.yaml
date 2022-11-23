@@ -1,0 +1,24 @@
+name: 522env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python-graphviz
+  - requests[version='>=2.24.0']
+  - scikit-learn
+  - selenium[version='<4.3.0']
+  - eli5
+  - shap
+  - imbalanced-learn
+  - lightgbm
+  - pip
+  - jinja2
+  - ipykernel
+  - jsonschema=4.16
+  - altair_saver
+  - pandas[version='<1.5']
+  - matplotlib[version='>=3.2.2']
+  - graphviz
+  - pip:
+    - docopt-ng==0.8.1
+    - vl-convert-python==0.5.0
