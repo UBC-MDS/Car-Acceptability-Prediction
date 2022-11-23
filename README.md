@@ -64,6 +64,8 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
     *  matplotlib                >=3.2.2
     *  jsonschema                4.16
     *  selenium                  <4.3.0
+    *  docopt-ng                 0.8.1
+    *  vl-convert-python         0.5.0
     *  eli5
     *  shap
     *  imbalanced-learn
@@ -75,7 +77,7 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
     *  python-graphviz
     *  graphviz
     *  scikit-learn              
-    *  altair_saver              
+    *  altair_saver
 
 # License
 
