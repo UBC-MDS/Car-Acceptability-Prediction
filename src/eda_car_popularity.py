@@ -9,7 +9,8 @@ Options:
 --training_data_path=<training_data_path> The path the the csv file containing training data
 --folder_result_path=<folder_result_path> The path to store the eda plots
 '''
-#python eda_car_popularity.py --training_data_path=../data/processed/training.csv --folder_result_path=../result
+# To execute script below run the following in your terminal
+# python eda_car_popularity.py --training_data_path=../data/processed/training.csv --folder_result_path=../result
 from docopt import docopt 
 import altair as alt
 import pandas as pd
@@ -30,8 +31,9 @@ def main(training_data_path, folder_result_path):
         print("The training data file path does not exist, check again")
         print(req)
 
-    # generate side by side plots with 2 columns
-    distri_plot = alt.Chart(train_df).mark_square().encode(
+    # Plot 1: Generate dist plot showing relation between count of each feature
+    # category against target
+    corr_plot = alt.Chart(train_df).mark_square().encode(
         x=alt.X(alt.repeat(), sort='-color'),
         y=alt.Y('class', sort='color'),
         color='count()',
@@ -41,11 +43,19 @@ def main(training_data_path, folder_result_path):
     ).repeat(
     ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'],columns = 2
     )
+    #Export plot 1: 
+    plot_save(corr_plot, "/eda_plot1_corr.png", folder_result_path)
 
-    plot_save(distri_plot, "/test_plot.png", folder_result_path)
-
-    #Generate histograms
-
+    #Plot 2: Histograms showing distribution of each feature
+    features = train_df.columns.tolist()
+    dist_plot = alt.Chart(train_df).mark_bar().encode(
+        alt.X(alt.repeat()
+        ),
+        y='count()'
+        ).repeat(features, columns=3)
+    
+    #Export plot 2:
+    plot_save(dist_plot, "/eda_plot2_dist.png", folder_result_path)
 
 #Function to output the plot in the folder_results_path
 def plot_save(plot, filename:str, folder_path):
