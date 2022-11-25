@@ -4,10 +4,10 @@ author: "Lisa Sequeira, Alex Taciuk, Peng Zhang, Gaoxiang Wang"
 date: "2022-11-25"
 always_allow_html: true
 output: 
-  html_document:
-    toc: TRUE
   github_document:
     toc: true 
+  html_document:
+    toc: TRUE
 bibliography: references.bib
 csl: data_science_and_engineering.csl
 ---
