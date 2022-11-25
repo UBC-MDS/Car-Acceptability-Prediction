@@ -52,6 +52,10 @@ To proceed, open and run "src/car_popularity_analysis.ipynb"
 
 `python src/car_classifier_analysis.py --train_test_folder_path=data/processed --result_folder_path=result`
 
+6. To render final report, run the following command at the project directory.
+
+`Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd', output_format = 'github_document')"`
+
 # Dependencies
 
 The conda environment, called `env522car.yaml`, can be found in the root directory.
