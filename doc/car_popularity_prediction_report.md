@@ -3,39 +3,40 @@ Car Popularity Prediction Report
 Lisa Sequeira, Alex Taciuk, Peng Zhang, Gaoxiang Wang
 2022-11-25
 
--   <a href="#summary" id="toc-summary">Summary</a>
--   <a href="#introduction" id="toc-introduction">Introduction</a>
--   <a href="#methods" id="toc-methods">Methods</a>
-    -   <a href="#data" id="toc-data">Data</a>
-    -   <a href="#question-of-interest" id="toc-question-of-interest">Question
-        of Interest</a>
-    -   <a href="#analysis" id="toc-analysis">Analysis</a>
--   <a href="#results--discussion" id="toc-results--discussion">Results
-    &amp; Discussion</a>
--   <a href="#references" id="toc-references">References</a>
+- <a href="#summary" id="toc-summary">Summary</a>
+- <a href="#introduction" id="toc-introduction">Introduction</a>
+- <a href="#methods" id="toc-methods">Methods</a>
+  - <a href="#data" id="toc-data">Data</a>
+  - <a href="#question-of-interest" id="toc-question-of-interest">Question
+    of Interest</a>
+  - <a href="#analysis" id="toc-analysis">Analysis</a>
+- <a href="#results--discussion" id="toc-results--discussion">Results
+  &amp; Discussion</a>
+- <a href="#references" id="toc-references">References</a>
 
 ## Summary
 
-Expecting a growing demand on used vehicles in the next years, we are
-interested to build a classification machine learning model to predict
-the popularity of a given used cars. The training data was from a public
-available 1990s Car Evaluation dataset with 1728 observations, 6
-categorical features and 1 categorical target. Data reading, data
-splitting, and Exploratory Data Analysis (EDA) in the Python environment
-have been performed. After that, `OrdinalEncoder` transformer has been
-applied to pre-process the 6 features, then we were using four different
+Expecting a growing demand for used vehicles in our business, we are
+interested in building a classification machine learning model to
+predict the popularity of a given used cars. The training data was from
+a public available 1990s Car Evaluation dataset with 1728 observations,
+6 categorical features and 1 categorical target. We performed data
+reading, data splitting, and Exploratory Data Analysis (EDA) in the
+Python environment. After that, `OrdinalEncoder` transformer was applied
+to pre-process the 6 features, then we were using four different
 scikit-learn classifiers, `DummyClassifier`, `DecisionTreeClassifier`,
-`RandomForestClassifier`, and `MultinomialNB` to conduct classifier
-tuning by using `balanced_accuracy` as the scoring metric. The result
-shown `RandomForestClassifier` had the best test score so we continued
-to complete a hyperparameter optimization on the selected
+`RandomForestClassifier`, and `MultinomialNB` to conduct
+cross-validation with `balanced_accuracy` as the scoring metric. The
+result showed `RandomForestClassifier` had the best test score, so we
+performed hyperparameter optimization on the selected
 `RandomForestClassifier`. At the end of the analysis, our best optimized
 classifier has been applied on the test data. We received a optimistic
-test score with 0.965.
+test score with 0.965. Scripts to run the analysis were created with
+Docopt \[1\].
 
 ## Introduction
 
-According to Environment and Climate Change Canada \[1\], the federal
+According to Environment and Climate Change Canada \[2\], the federal
 government announced “by 2035, all new cars and light-duty trucks sold
 in the country will be zero-emission vehicles.” This was really an
 exciting news from tacking climate change perspectives. We embrace the
@@ -53,14 +54,14 @@ So the team searched from public accessible data sources and found the
 1990s Car Evaluation dataset. Based on the dataset, we have trained and
 optimized a classification machine learning algorithm to predict how
 popular a given car model is. This would be much likely to boost our
-efficiencies when starting to assess a large number of used cars on a
+efficiency when starting to assess a large number of used cars on a
 daily basis.
 
 ## Methods
 
 ### Data
 
-The 1990s Car Evaluation dataset \[2\] utilized in this project was
+The 1990s Car Evaluation dataset \[3\] utilized in this project was
 primarily collected in June 1997 by Marko Bohanec to evaluate HINT
 (Hierarchy INduction Tool), which is presented in B. Zupan, M. Bohanec,
 I. Bratko, J. Demsar: Machine learning by function decomposition.
@@ -81,8 +82,8 @@ safety of the car (safety).
 
 ### Question of Interest
 
-Our research question is **given attributes of car models from the
-1990s, how can we predict the popularity of each car model?**
+Our research question is: **Given attributes of car models from the 90s,
+can we predict how popular each car model will be?**
 
 This is a straightforward prediction question to be answered based on
 the representative sample training data, sophisticated machine learning
@@ -98,19 +99,20 @@ Our objective is to take necessary steps to build a well-performed
 machine learning model that can give us the best prediction result from
 the inputs of the six attributes. In order to achieve the objective, the
 very first step was to read the data, and split the data into training
-and test sets to ensure the Machine Learning Golden Rule to be followed.
-Second, we have used some basic `Python` \[3\] functions from `Pandas`
-package \[4\] to quickly exam the dataset to know the columns, data
+and test sets to ensure the Machine Learning Golden Rule is followed.
+Second, we have used some basic `Python` \[4\] functions from `Pandas`
+package \[5\] to quickly examine the dataset to know the columns, data
 types, and if there is any missing value. After getting a higher level
 understanding of the dataset, a more detailed Exploratory Data Analysis
-(EDA) has been performed via `Pandas` and `Altair`packages \[5\] to find
+(EDA) has been performed via `Pandas` and `Altair`packages \[6\] to find
 correlations and patterns between input attributes and target classes.
 Then we moved on to the standard machine learning process to build up
 our prediction model. The process included the necessary feature
 pre-processing/transformation, pipeline building, classifier tuning,
 hyperparameters tuning, and final performance assessment by applying
-Scikit-learn machine learning packages \[6\] within our defined Python
-environment.
+Scikit-learn machine learning packages \[7\] within our defined Python
+environment. This report was produced in R\[8\] via an R-markdown
+script.
 
 The raw dataset and our processed data are available to be accessed from
 <a href="https://github.com/UBC-MDS/Car-Acceptability-Prediction/tree/main/data" target="_blank">here</a>.
@@ -177,7 +179,7 @@ train_score
 <tbody>
 <tr>
 <td style="text-align:left;">
-0.003 (+/- 0.001)
+0.004 (+/- 0.001)
 </td>
 <td style="text-align:left;">
 0.002 (+/- 0.001)
@@ -205,10 +207,10 @@ train_score
 </tr>
 <tr>
 <td style="text-align:left;">
-0.058 (+/- 0.000)
+0.059 (+/- 0.001)
 </td>
 <td style="text-align:left;">
-0.005 (+/- 0.000)
+0.006 (+/- 0.000)
 </td>
 <td style="text-align:left;">
 0.959 (+/- 0.023)
@@ -280,7 +282,7 @@ mean_fit_time
 12
 </td>
 <td style="text-align:right;">
-0.0577662
+0.0580449
 </td>
 </tr>
 <tr>
@@ -294,7 +296,7 @@ mean_fit_time
 13
 </td>
 <td style="text-align:right;">
-0.0570519
+0.0546031
 </td>
 </tr>
 <tr>
@@ -308,7 +310,7 @@ mean_fit_time
 12
 </td>
 <td style="text-align:right;">
-0.0601817
+0.0582960
 </td>
 </tr>
 <tr>
@@ -322,7 +324,7 @@ mean_fit_time
 12
 </td>
 <td style="text-align:right;">
-0.0525115
+0.0534806
 </td>
 </tr>
 <tr>
@@ -336,7 +338,7 @@ mean_fit_time
 18
 </td>
 <td style="text-align:right;">
-0.0546312
+0.0479486
 </td>
 </tr>
 <tr>
@@ -350,7 +352,7 @@ mean_fit_time
 19
 </td>
 <td style="text-align:right;">
-0.0664804
+0.0604057
 </td>
 </tr>
 </tbody>
@@ -381,9 +383,18 @@ analysis that should be highlighted:
 
 <div id="refs" class="references csl-bib-body">
 
-<div id="ref-2035_zero_emission" class="csl-entry">
+<div id="ref-Docopt" class="csl-entry">
 
 <span class="csl-left-margin">1. </span><span
+class="csl-right-inline">de Jonge E (2020) [Docopt: Command-line
+interface specification
+language](https://CRAN.R-project.org/package=docopt)</span>
+
+</div>
+
+<div id="ref-2035_zero_emission" class="csl-entry">
+
+<span class="csl-left-margin">2. </span><span
 class="csl-right-inline">Zhongming Z, Linong L, Xiaona Y, et al (2021)
 Government launches consultations on commitment to require all new cars
 sold in canada be zero emission by 2035</span>
@@ -392,14 +403,14 @@ sold in canada be zero emission by 2035</span>
 
 <div id="ref-Car_evaluation_dataset" class="csl-entry">
 
-<span class="csl-left-margin">2. </span><span
+<span class="csl-left-margin">3. </span><span
 class="csl-right-inline">(1997) Car Evaluation</span>
 
 </div>
 
 <div id="ref-Python" class="csl-entry">
 
-<span class="csl-left-margin">3. </span><span
+<span class="csl-left-margin">4. </span><span
 class="csl-right-inline">Van Rossum G, Drake FL (2009) Python 3
 reference manual. CreateSpace, Scotts Valley, CA</span>
 
@@ -407,7 +418,7 @@ reference manual. CreateSpace, Scotts Valley, CA</span>
 
 <div id="ref-pandas" class="csl-entry">
 
-<span class="csl-left-margin">4. </span><span
+<span class="csl-left-margin">5. </span><span
 class="csl-right-inline">team T pandas development (2020)
 [Pandas-dev/pandas: pandas](https://doi.org/10.5281/zenodo.3509134).
 Zenodo</span>
@@ -416,7 +427,7 @@ Zenodo</span>
 
 <div id="ref-Altair" class="csl-entry">
 
-<span class="csl-left-margin">5. </span><span
+<span class="csl-left-margin">6. </span><span
 class="csl-right-inline">VanderPlas J, Granger B, Heer J, et al (2018)
 Altair: Interactive statistical visualizations for python. Journal of
 open source software 3:1057</span>
@@ -425,10 +436,19 @@ open source software 3:1057</span>
 
 <div id="ref-scikit-learn" class="csl-entry">
 
-<span class="csl-left-margin">6. </span><span
+<span class="csl-left-margin">7. </span><span
 class="csl-right-inline">Pedregosa F, Varoquaux G, Gramfort A, et al
 (2011) Scikit-learn: Machine learning in Python. Journal of Machine
 Learning Research 12:2825–2830</span>
+
+</div>
+
+<div id="ref-R" class="csl-entry">
+
+<span class="csl-left-margin">8. </span><span class="csl-right-inline">R
+Core Team (2022) [R: A language and environment for statistical
+computing](https://www.R-project.org/). R Foundation for Statistical
+Computing, Vienna, Austria</span>
 
 </div>
 
