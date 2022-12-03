@@ -4,15 +4,15 @@
 
 all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
 
-# download data
+# download raw data
 data/raw/raw_data.csv: src/download_data.py
 	python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --out_file=data/raw/raw_data.csv
 
-# pre-process data (e.g., scale and split into train & test)
-data/processed/training.feather data/processed/test.feather scale_factor.rds: src/pre_process_wisc.r data/raw/wdbc.feather
-	Rscript src/pre_process_wisc.r --input=data/raw/wdbc.feather --out_dir=data/processed 
+# preprocessing of the data and data splitting into train and test
+data/processed/train.csv data/processed/test.csv: src/data_processing.py data/raw/raw_data.csv
+	python src/data_processing.py --input=data/raw/raw_data.csv --out_dir=data/processed
 
-# exploratory data analysis - visualize predictor distributions across classes
+# exploratory data analysis - visualize relationship between features and between target to features
 results/predictor_distributions_across_class.png: src/eda_wisc.r data/processed/training.feather
 	Rscript src/eda_wisc.r --train=data/processed/training.feather --out_dir=results
 
