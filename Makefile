@@ -1,8 +1,8 @@
 # Car-Acceptability-Prediction
-# Author: DSCI 522 Group 
+# Author: DSCI 522 Group 19
 # Date: 2022-12-03
 
-all: 
+all: result/eda_plot1_corr.png result/eda_plot2_dist.png result/car_classifier_tuning_analysis.csv result/car_hyperparameter_tuning_analysis.csv result/final_model.joblib result/final_model_score.txt doc/car_popularity_prediction_report.html doc/car_popularity_prediction_report.md
 
 # download raw data
 data/raw/raw_data.csv: src/download_data.py
@@ -16,13 +16,13 @@ data/processed/train.csv data/processed/test.csv: src/data_processing.py data/ra
 result/eda_plot1_corr.png result/eda_plot2_dist.png: src/eda_car_popularity.py data/processed/training.csv
 	python src/eda_car_popularity.py --training_data_path=data/processed/training.csv --folder_result_path=result
 
-# Tuning and training classifier model
-result/car_classifier_tuning_analysis.csv result/car_hyperparameter_tuning_analysis.csv result/final_model.joblib result/final_model_score.txt: src/car_classifier_analysis.py data/processed/training.feather
+# Tuning, training and testing classifier model
+result/car_classifier_tuning_analysis.csv result/car_hyperparameter_tuning_analysis.csv result/final_model.joblib result/final_model_score.txt: src/car_classifier_analysis.py data/processed/training.csv data/processed/test.csv
 	python src/car_classifier_analysis.py --train_test_folder_path=data/processed --result_folder_path=result
 
 # render report
-doc/breast_cancer_predict_report.md: doc/breast_cancer_predict_report.Rmd doc/breast_cancer_refs.bib
-	Rscript -e "rmarkdown::render('doc/breast_cancer_predict_report.Rmd', output_format = 'github_document')"
+doc/car_popularity_prediction_report.html doc/car_popularity_prediction_report.md: doc/car_popularity_prediction_report.Rmd doc/references.bib result/eda_plot2_dist.png result/eda_plot1_corr.png result/car_classifier_tuning_analysis.csv result/car_hyperparameter_tuning_analysis.csv 
+	Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd', output_format = 'github_document')"
 
 clean: 
 	rm -rf data
