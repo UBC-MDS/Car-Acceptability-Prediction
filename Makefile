@@ -2,7 +2,7 @@
 # Author: DSCI 522 Group 
 # Date: 2022-12-03
 
-all: results/final_model.rds results/accuracy_vs_k.png results/predictor_distributions_across_class.png results/final_model_quality.rds doc/breast_cancer_predict_report.md
+all: 
 
 # download raw data
 data/raw/raw_data.csv: src/download_data.py
@@ -10,19 +10,15 @@ data/raw/raw_data.csv: src/download_data.py
 
 # preprocessing of the data and data splitting into train and test
 data/processed/train.csv data/processed/test.csv: src/data_processing.py data/raw/raw_data.csv
-	python src/data_processing.py --input=data/raw/raw_data.csv --out_dir=data/processed
+	python src/data_processing.py --raw_data_path=data/raw/raw_data.csv --clean_data_folder_path=data/processed
 
 # exploratory data analysis - visualize relationship between features and between target to features
-results/predictor_distributions_across_class.png: src/eda_wisc.r data/processed/training.feather
-	Rscript src/eda_wisc.r --train=data/processed/training.feather --out_dir=results
+result/eda_plot1_corr.png result/eda_plot2_dist.png: src/eda_car_popularity.py data/processed/training.csv
+	python src/eda_car_popularity.py --training_data_path=data/processed/training.csv --folder_result_path=result
 
-# tune model (here, find K for k-nn using 30 fold cv with Cohen's Kappa)
-results/final_model.rds results/accuracy_vs_k.png: src/fit_breast_cancer_predict_model.r data/processed/training.feather
-	Rscript src/fit_breast_cancer_predict_model.r --train=data/processed/training.feather --out_dir=results
-
-# test model on unseen data
-results/final_model_quality.rds: src/breast_cancer_test_results.r data/processed/test.feather
-	Rscript src/breast_cancer_test_results.r --test=data/processed/test.feather --out_dir=results
+# Tuning and training classifier model
+result/car_classifier_tuning_analysis.csv result/car_hyperparameter_tuning_analysis.csv result/final_model.joblib result/final_model_score.txt: src/car_classifier_analysis.py data/processed/training.feather
+	python src/car_classifier_analysis.py --train_test_folder_path=data/processed --result_folder_path=result
 
 # render report
 doc/breast_cancer_predict_report.md: doc/breast_cancer_predict_report.Rmd doc/breast_cancer_refs.bib
