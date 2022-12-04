@@ -6,10 +6,10 @@ all: result/eda_plot1_corr.png result/eda_plot2_dist.png result/car_classifier_t
 
 # download raw data
 data/raw/raw_data.csv: src/download_data.py
-	python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --out_file=data/raw/raw_data.csv
+	python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --local_file_path=data/raw/raw_data.csv
 
 # preprocessing of the data and data splitting into train and test
-data/processed/train.csv data/processed/test.csv: src/data_processing.py data/raw/raw_data.csv
+data/processed/training.csv data/processed/test.csv: src/data_processing.py data/raw/raw_data.csv
 	python src/data_processing.py --raw_data_path=data/raw/raw_data.csv --clean_data_folder_path=data/processed
 
 # exploratory data analysis - visualize relationship between features and between target to features
