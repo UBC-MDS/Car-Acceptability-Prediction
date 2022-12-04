@@ -30,7 +30,7 @@ def main(training_data_path, folder_result_path):
     except Exception as req:
         print("The training data file path does not exist, check again")
         print(req)
-
+    
     # Plot 1: Generate dist plot showing relation between count of each feature
     # category against target
     corr_plot = alt.Chart(train_df).mark_square().encode(
@@ -43,7 +43,7 @@ def main(training_data_path, folder_result_path):
     ).repeat(
     ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'],columns = 2
     )
-    #Export plot 1: 
+    #Export plot 1:
     plot_save(corr_plot, "/eda_plot1_corr.png", folder_result_path)
 
     #Plot 2: Histograms showing distribution of each feature
@@ -57,22 +57,16 @@ def main(training_data_path, folder_result_path):
     #Export plot 2:
     plot_save(dist_plot, "/eda_plot2_dist.png", folder_result_path)
 
-
 #Function to output the plot in the folder_results_path
 def plot_save(plot, filename:str, folder_path):
     png_data = vlc.vegalite_to_png(plot.to_dict())
     
     #Writing the plot to the folder path
     #Example: with open(folder_result_path+"/chart.png", "wb")
+    os.makedirs(os.path.dirname(folder_path+filename), exist_ok=True)
     with open(folder_path+filename, "wb") as f:
         f.write(png_data)
     
-    #Because of an altair issue, we cannot use the code line below to export graphs
-        #try:
-            #distri_plot.save(folder_result_path+'/EDA_distribution_plot.png')
-        #except:
-            #os.makedirs(os.path.dirname(folder_result_path), exist_ok=True)
-            #distri_plot.save(folder_result_path+'/EDA_distribution_plot.png')
 
 if __name__ == "__main__":
     main(opt["--training_data_path"], opt["--folder_result_path"])
