@@ -43,8 +43,12 @@ def main(training_data_path, folder_result_path):
     ).repeat(
     ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'],columns = 2
     )
-    #Export plot 1: 
-    plot_save(corr_plot, "/eda_plot1_corr.png", folder_result_path)
+    #Export plot 1:
+    try:
+        corr_plot.save(folder_result_path+'/eda_plot1_corr.png')
+    except:
+        os.makedirs(os.path.dirname(folder_result_path), exist_ok=True)
+        corr_plot.save(folder_result_path+'/eda_plot1_corr.png') 
 
     #Plot 2: Histograms showing distribution of each feature
     features = train_df.columns.tolist()
@@ -55,8 +59,11 @@ def main(training_data_path, folder_result_path):
         ).repeat(features, columns=3)
     
     #Export plot 2:
-    plot_save(dist_plot, "/eda_plot2_dist.png", folder_result_path)
-
+    try:
+        dist_plot.save(folder_result_path+'/eda_plot2_dist.png')
+    except:
+        os.makedirs(os.path.dirname(folder_result_path), exist_ok=True)
+        dist_plot.save(folder_result_path+'/eda_plot2_dist.png')
 
 #Function to output the plot in the folder_results_path
 def plot_save(plot, filename:str, folder_path):
