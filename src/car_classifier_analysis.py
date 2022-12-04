@@ -1,3 +1,4 @@
+# author: Group 19
 # date: 2022-11-20
 '''This script takes the file path of traning data, then does machine learning analysis 
 (muti classififer tuning)(hyperparameter tuning) (final model fitting),
