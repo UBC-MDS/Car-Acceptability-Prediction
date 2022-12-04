@@ -30,23 +30,35 @@ We will share the results of our analysis via the following: After selecting our
 # Usage
 Note: Make sure have the necessary dependencies installed for your conda environment.
 
+Fork the repo and clone the forked repo to your local machine by runng `git clone {repo URL}`. Then run `conda env create -f env522car.yaml` and `conda activate 522env`.
+## using `make`
+
+To reproduce the analysis, run the command at the root directory.
+
+`make all`
+
+To reset and redo the analysis from beginning, run the command at the root directory.
+
+`make clean`
+## without using `make`
+
 1. Using `docopt` in Python to download data file from external URL 
 
 To proceed, run the following command at the command line and set root directory as the current working directory.
 
-`python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --local_file_path="data/raw/raw_data.csv"`
+`python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --local_file_path=data/raw/raw_data.csv`
 
 2. Using `Altair` in Python to render the literate Exploratory Data Analysis.
 
-To proceed, open and run "src/car_popularity_analysis.ipynb"
+To proceed, open and run `src/car_popularity_analysis.ipynb`
 
 3. For processing raw data, run the following command at the root directory.
 
-`python src/data_processing.py --raw_data_path='data/raw/raw_data.csv' --clean_data_folder_path='data/processed'`
+`python src/data_processing.py --raw_data_path=data/raw/raw_data.csv --clean_data_folder_path=data/processed`
 
 4. For eda plotting of training data, run the following command at the root directory.
 
-`python src/eda_car_popularity.py --training_data_path='data/processed/training.csv' --folder_result_path=result`
+`python src/eda_car_popularity.py --training_data_path=data/processed/training.csv --folder_result_path=result`
 
 5. For machine learning analysis for traning data, run the following command at the root directory.
 
@@ -72,18 +84,17 @@ The conda environment, called `env522car.yaml`, can be found in the root directo
     *  selenium                  <4.3.0
     *  docopt-ng                 0.8.1
     *  vl-convert-python         0.5.0
-    *  eli5
-    *  shap
-    *  imbalanced-learn
-    *  lightgbm
-    *  pip
-    *  jinja2
-    *  ipykernel
-    *  altair_saver
-    *  python-graphviz
-    *  graphviz
-    *  scikit-learn              
-    *  altair_saver
+    *  eli5                      0.13.0
+    *  shap                      0.41.0
+    *  imbalanced-learn          0.9.1
+    *  lightgbm                  3.3.3
+    *  pip                       22.3.1
+    *  jinja2                    3.1.2
+    *  ipykernel                 6.18.0
+    *  altair_saver              0.5.0
+    *  python-graphviz           0.20.1
+    *  graphviz                  6.0.1
+    *  scikit-learn              1.1.3          
 
 # License
 
