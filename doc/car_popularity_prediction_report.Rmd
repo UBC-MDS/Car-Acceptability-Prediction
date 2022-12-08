@@ -4,10 +4,10 @@ author: "Lisa Sequeira, Alex Taciuk, Peng Zhang, Gaoxiang Wang"
 date: "2022-11-25"
 always_allow_html: true
 output: 
-  github_document:
-    toc: true 
   html_document:
     toc: TRUE
+  github_document:
+    toc: true 
 bibliography: references.bib
 csl: data_science_and_engineering.csl
 ---
@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(pandoc)
 ```
 
 ## Summary
