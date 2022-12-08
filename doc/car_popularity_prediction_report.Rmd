@@ -55,13 +55,13 @@ The raw dataset and our processed data are available to be accessed from <a href
 In the EDA stage, we have created two plots to visually explore the distribution of six input attributes together with the target column, and also the counting combinations between input attributes and target classes. From Figure 1 we can see all six input attributes are almost identical distributed, while the classes in the target column are quite imbalanced. Most of the observations are belonging to the class of "unacc". Only a few of them are labeled as "good" or "vgood". This might remind us we have to be careful for the quality of used cars when we start to build our inventory.
 
 ```{r figure_1, echo=FALSE, fig.align='center', out.width = '40%', fig.cap="Figure 1. Distribution of six input features and target"}
-knitr::include_graphics("../result/eda_plot2_dist.png")
+knitr::include_graphics("../result/eda_plot2_dist.png")   
 ```
 
 Figure 2 has been generated to show the counting combinations between six input features and the target. This is similar to the correlation plot that can give us ideas how the input feature related to different classes of target. For example, from the counting combination between the feature of "persons" and the target, we can get an intuition that small cars that only accommodate two people will be more unacceptable. The finding also indicates the feature of "persons" is a meaningful input for models to classify cars into appropriate classes of target.
 
 ```{r figure_2, echo=FALSE, fig.align='center', fig.cap="Figure 2. Counting combinations between classes with each feature", out.width = '60%'}
-knitr::include_graphics("../result/eda_plot1_corr.png")
+knitr::include_graphics("../result/eda_plot1_corr.png")   
 ```
 
 Since the raw data was clean enough, our data processing was just focusing on the training/test sets splitting and automatically saving the separate dataframe in the designed data subfolder. Then in the model building stage, we have applied `OrdinalEncoder` transformer to pre-process all six input features, used four different classifiers, `DummyClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, and `MultinomialNB` to perform classifier tuning by using `balanced_accuracy` as the scoring metric. The classifier tuning result is shown in Table 1.
