@@ -1,6 +1,6 @@
 ---
 title: "Car Popularity Prediction Report"
-author: "Lisa Sequeira, Alex Taciuk, Peng Zhang, Gaoxiang Wang"
+author: "Group 19: Lisa Sequeira, Alex Taciuk, Peng Zhang, Gaoxiang Wang"
 date: "2022-11-25"
 always_allow_html: true
 output: 
@@ -22,13 +22,13 @@ library(pandoc)
 
 ## Summary
 
-Expecting a growing demand for used vehicles in our business, we are interested in building a classification machine learning model to predict the popularity of a given used cars. The training data was from a public available 1990s Car Evaluation dataset with 1728 observations, 6 categorical features and 1 categorical target. We performed data reading, data splitting, and Exploratory Data Analysis (EDA) in the Python environment. After that, `OrdinalEncoder` transformer was applied to pre-process the 6 features, then we were using four different scikit-learn classifiers, `DummyClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, and `MultinomialNB` to conduct cross-validation with `balanced_accuracy` as the scoring metric. The result showed `RandomForestClassifier` had the best test score, so we performed hyperparameter optimization on the selected `RandomForestClassifier`. At the end of the analysis, our best optimized classifier has been applied on the test data. We received a optimistic test score with 0.965. Scripts to run the analysis were created with Docopt [@Docopt].
+Expecting a growing demand for used vehicles in our business, we are interested in building a classification machine learning model to predict the popularity of a given used cars. The training data was from a publicly available 1990s Car Evaluation dataset with 1728 observations, 6 categorical features and 1 categorical target. We performed data reading, data splitting, and Exploratory Data Analysis (EDA) in the Python environment. After that, `OrdinalEncoder` transformer was applied to pre-process the 6 features, then we were using four different scikit-learn classifiers, `DummyClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, and `MultinomialNB` to conduct cross-validation with `balanced_accuracy` as the scoring metric. The result showed `RandomForestClassifier` had the best test score, so we performed hyperparameter optimization on the selected `RandomForestClassifier`. At the end of the analysis, our best optimized classifier has been applied on the test data. We received a optimistic test score with 0.965. Scripts to run the analysis were created with Docopt [@Docopt].
 
 ## Introduction
 
 According to Environment and Climate Change Canada [@2035_zero_emission], the federal government announced "by 2035, all new cars and light-duty trucks sold in the country will be zero-emission vehicles." This was really an exciting news from tacking climate change perspectives. We embrace the commitment to reach net-zero carbon emissions in Canada. And also with strong business acumen, our team members realized there would be a growing demand on used vehicles for various reasons, such as collection, preference for fossil fuel vehicles, etc. We should get ready to have a robust business plan.
 
-To initialize the business journey, we must learn how to evaluate used cars and know which models would be more popular (in other words, will generate better returns on our investment). As current MDS students, we all understand how valuable a data-driven decision making approach is. So the team searched from public accessible data sources and found the 1990s Car Evaluation dataset. Based on the dataset, we have trained and optimized a classification machine learning algorithm to predict how popular a given car model is. This would be much likely to boost our efficiency when starting to assess a large number of used cars on a daily basis.
+To initialize the business journey, we must learn how to evaluate used cars and know which models would be more popular (in other words, will generate better returns on our investment). As current MDS students, we all understand how valuable a data-driven decision making approach is. So the team searched from publicly accessible data sources and found the 1990s Car Evaluation dataset. Based on the dataset, we have trained and optimized a classification machine learning algorithm to predict how popular a given car model is. This would be much likely to boost our efficiency when starting to assess a large number of used cars on a daily basis.
 
 ## Methods
 
@@ -74,7 +74,7 @@ knitr::kable(table_1, caption = "Table 1. Classifier tuning results") |>
 
 From Table 1, we can see `RandomForestClassifier` has the highest test score (on the third row) in this case. Therefore, we decided to select `RandomForestClassifier` as our prediction model and conducted the random search hyperparameter tuning on this classifier. The hyperparamer tuning was focused on two hyperparameters, rf\_\_n_estimators and rf\_\_max_depth.
 
-Table 2 has listed the hyperparameter optimization result (only first 6 rows displayed). It was sorted by the average test scores. As we can see from Table 2, the test score has been further improved from 0.959 to 0.968, with the best hyperparameters (param_rf\_\_n_estimators equals to 68 and param_rf\_\_max_depth equals to 12). Our selected classifier performed well on training dataset.
+Table 2 has listed the hyperparameter optimization result (only first 6 rows displayed). It was sorted by the average test scores. As we can see from Table 2, the test score has been further improved from 0.959 to 0.968. And the best hyperparameters of param_rf\_\_n_estimators and param_rf\_\_max_depth are indicated in the first row of the table. Our selected classifier performed well on training dataset.
 
 ```{r table_2, echo=FALSE}
 table_2 <- read.csv('../result/car_hyperparameter_tuning_analysis.csv')
