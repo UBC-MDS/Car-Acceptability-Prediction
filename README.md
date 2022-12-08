@@ -66,7 +66,7 @@ To proceed, open and run `src/car_popularity_analysis.ipynb`
 
 6. To render final report, run the following command at the project directory.
 
-`Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd', output_format = 'github_document')"`
+`Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd')"`
 
 # Dependencies
 
