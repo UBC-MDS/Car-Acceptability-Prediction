@@ -1,3 +1,4 @@
+# author: Lisa Sequeira, Alex Taciuk, Peng Zhang, Gaoxiang Wang
 # date: 2022-11-20
 '''This script takes the file path of raw data, then add column names and split the data into training/test data with seed, 
 write the two data to the processed/clean data folder path.
