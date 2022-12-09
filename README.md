@@ -26,25 +26,43 @@ We will share the results of our analysis via the following: After selecting our
 
 
 # Usage
-Note: Make sure have the necessary dependencies installed for your conda environment.
 
-Fork the repo and clone the forked repo to your local machine by runng `git clone {repo URL}`. Then run `conda env create -f env522car.yaml` and `conda activate 522env`.
+To start off, fork the repo and clone the forked repo to your local machine by running: 
+
+```
+ git clone https://github.com/UBC-MDS/Car-Acceptability-Prediction.git 
+```
+
+Then run the code block below to install the environment and activate it, before proceeding with the steps below. 
+
+```
+conda env create -f env522car.yaml
+conda activate 522env
+```
+
 ## using `make`
 
 To reproduce the analysis, run the command at the root directory.
 
-`make all`
+```
+make all
+```
 
 To reset and redo the analysis from beginning, run the command at the root directory.
 
-`make clean`
+```
+make clean
+```
+
 ## without using `make`
 
 1. Using `docopt` in Python to download data file from external URL 
 
 To proceed, run the following command at the command line and set root directory as the current working directory.
 
-`python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --local_file_path=data/raw/raw_data.csv`
+```
+python src/download_data.py --url=https://archive.ics.uci.edu/ml/machine-learning-databases/car/car.data --local_file_path=data/raw/raw_data.csv
+```
 
 2. Using `Altair` in Python to render the literate Exploratory Data Analysis.
 
@@ -52,19 +70,27 @@ To proceed, open and run `src/car_popularity_analysis.ipynb`
 
 3. For processing raw data, run the following command at the root directory.
 
-`python src/data_processing.py --raw_data_path=data/raw/raw_data.csv --clean_data_folder_path=data/processed`
+```
+python src/data_processing.py --raw_data_path=data/raw/raw_data.csv --clean_data_folder_path=data/processed
+```
 
 4. For eda plotting of training data, run the following command at the root directory.
 
-`python src/eda_car_popularity.py --training_data_path=data/processed/training.csv --folder_result_path=result`
+```
+python src/eda_car_popularity.py --training_data_path=data/processed/training.csv --folder_result_path=result
+```
 
 5. For machine learning analysis for traning data, run the following command at the root directory.
 
-`python src/car_classifier_analysis.py --train_test_folder_path=data/processed --result_folder_path=result`
+```
+python src/car_classifier_analysis.py --train_test_folder_path=data/processed --result_folder_path=result
+```
 
 6. To render final report, run the following command at the project directory.
 
-`Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd')"`
+```
+Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd')"
+```
 
 # Dependencies
 
