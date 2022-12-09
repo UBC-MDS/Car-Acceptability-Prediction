@@ -28,5 +28,10 @@ RUN conda install pandas[version='<1.5'] -y
 
 # install R and R packages 
 RUN conda install -c conda-forge r r-essentials
+RUN conda install -c conda-forge r-kableextra -y
 RUN apt-get install pandoc -y
 RUN Rscript -e "install.packages('kableExtra',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('xfun',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('vctrs',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('pandoc',repos = 'http://cran.us.r-project.org')"
+RUN apt-get install libxt6
