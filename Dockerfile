@@ -1,5 +1,7 @@
 FROM continuumio/miniconda3@sha256:977263e8d1e476972fddab1c75fe050dd3cd17626390e874448bd92721fd659b
 
+ENV PATH="/opt/conda/bin:${PATH}"
+
 RUN pip install docopt-ng==0.8.1 \
     && pip install vl-convert-python==0.5.0
 
