@@ -1,6 +1,6 @@
 FROM continuumio/miniconda3@sha256:977263e8d1e476972fddab1c75fe050dd3cd17626390e874448bd92721fd659b
 
-ENV PATH="/opt/conda/bin:${PATH}"
+ENV PATH /opt/conda/envs/env/bin:$PATH 
 
 RUN pip install docopt-ng==0.8.1 \
     && pip install vl-convert-python==0.5.0
@@ -17,7 +17,6 @@ RUN conda install python-graphviz -y \
     && conda install -c conda-forge altair_saver -y \
     && conda install pandas[version='<1.5'] -y \
     && conda install matplotlib[version='>=3.2.2'] -y \
-    && conda install graphviz -y \
     && conda install -c anaconda docopt -y \
     && conda install -c conda-forge eli5 -y \
     && conda install -c conda-forge shap -y \
