@@ -93,6 +93,12 @@ The conda environment, called `env522car.yaml`, can be found in the root directo
     *  python-graphviz           0.20.1
     *  graphviz                  6.0.1
     *  scikit-learn              1.1.3          
+* R 4.2.1 and R packages:
+    *  tidyverse.                1.3.2
+    *  knitr                     1.40
+    *  kableExtra                1.3.4
+    *  pandoc                    0.1.0
+* GNU make 4.2.1
 
 # License
 
