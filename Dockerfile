@@ -3,24 +3,24 @@ FROM continuumio/miniconda3@sha256:977263e8d1e476972fddab1c75fe050dd3cd17626390e
 ENV PATH="/opt/conda/bin:${PATH}"
 
 RUN pip install docopt-ng==0.8.1 \
-    && pip install vl-convert-python==0.5.0
+    && pip install vl-convert-python==0.5.0 \
+    && pip install docopt==0.6.2
 
-RUN conda install python-graphviz -y \
-    && conda install requests[version='>=2.24.0'] -y \
-    && conda install scikit-learn -y \
-    && conda install selenium[version='<4.3.0'] -y \
-    && conda install lightgbm -y \
-    && conda install pip -y \
-    && conda install jinja2 -y \
-    && conda install ipykernel -y \
-    && conda install jsonschema=4.16 -y \
-    && conda install -c conda-forge altair_saver -y \
-    && conda install pandas[version='<1.5'] -y \
-    && conda install matplotlib[version='>=3.2.2'] -y \
-    && conda install -c anaconda docopt -y \
-    && conda install -c conda-forge eli5 -y \
-    && conda install -c conda-forge shap -y \
-    && conda install -c conda-forge imbalanced-learn -y 
+RUN conda install python-graphviz -y 
+RUN conda install requests[version='>=2.24.0'] -y 
+RUN conda install scikit-learn -y 
+RUN conda install selenium[version='<4.3.0'] -y 
+RUN conda install lightgbm -y 
+RUN conda install pip -y 
+RUN conda install jinja2 -y 
+RUN conda install ipykernel -y 
+RUN conda install jsonschema=4.16 -y 
+RUN conda install -c conda-forge altair_saver -y 
+RUN conda install pandas[version='<1.5'] -y 
+RUN conda install matplotlib[version='>=3.2.2'] -y 
+RUN conda install -c conda-forge eli5 -y 
+RUN conda install -c conda-forge shap -y 
+RUN conda install -c conda-forge imbalanced-learn -y 
 
 RUN apt-get update
 RUN apt-get install libfontconfig1-dev -y
