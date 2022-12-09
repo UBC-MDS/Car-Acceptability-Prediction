@@ -9,6 +9,16 @@ RUN pip install docopt-ng==0.8.1 \
 RUN apt-get update
 RUN apt-get install libfontconfig1-dev -y
 
+# install R and R packages 
+RUN conda install -c conda-forge r r-essentials
+RUN conda install -c conda-forge r-kableextra -y
+RUN apt-get install pandoc -y
+RUN Rscript -e "install.packages('kableExtra',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('xfun',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('vctrs',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('pandoc',repos = 'http://cran.us.r-project.org')"
+RUN apt-get install libxt6
+
 # install python packages
 RUN conda install -c conda-forge matplotlib -y 
 RUN conda install -c conda-forge eli5 -y 
@@ -25,13 +35,3 @@ RUN conda install ipykernel -y
 RUN conda install jsonschema=4.16 -y 
 RUN conda install -c conda-forge altair_saver -y 
 RUN conda install pandas[version='<1.5'] -y 
-
-# install R and R packages 
-RUN conda install -c conda-forge r r-essentials
-RUN conda install -c conda-forge r-kableextra -y
-RUN apt-get install pandoc -y
-RUN Rscript -e "install.packages('kableExtra',repos = 'http://cran.us.r-project.org')"
-RUN Rscript -e "install.packages('xfun',repos = 'http://cran.us.r-project.org')"
-RUN Rscript -e "install.packages('vctrs',repos = 'http://cran.us.r-project.org')"
-RUN Rscript -e "install.packages('pandoc',repos = 'http://cran.us.r-project.org')"
-RUN apt-get install libxt6
