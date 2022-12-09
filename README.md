@@ -96,4 +96,4 @@ The conda environment, called `env522car.yaml`, can be found in the root directo
 
 # License
 
-The Car Popularity Predictor materials here are licensed under [Creative Commons Attribution 4.0 Canada License (CC BY 4.0 CA).](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode) 
+The Car Popularity Predictor materials here are licensed under [Creative Commons Attribution 4.0 Canada License (CC BY 4.0 CA).](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode)
