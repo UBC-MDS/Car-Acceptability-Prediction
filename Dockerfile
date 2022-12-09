@@ -27,4 +27,4 @@ RUN apt-get install libfontconfig1-dev -y
 # install R and R packages 
 RUN conda install -c conda-forge r r-essentials
 RUN Rscript -e "install.packages('kableExtra',repos = 'http://cran.us.r-project.org')"
-RUN Rscript -e "install.packages('pandoc',repos = 'http://cran.us.r-project.org')"
+RUN Rscript -e "install.packages('pandoc',repos = 'http://cran.us.r-project.org')" 
