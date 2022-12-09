@@ -49,9 +49,8 @@ def main(training_data_path, folder_result_path):
     #Plot 2: Histograms showing distribution of each feature
     features = train_df.columns.tolist()
     dist_plot = alt.Chart(train_df).mark_bar().encode(
-        alt.X(alt.repeat()
-        ),
-        y='count()'
+        alt.Y(alt.repeat()),
+        x='count()'
         ).repeat(features, columns=3)
     
     #Export plot 2:
