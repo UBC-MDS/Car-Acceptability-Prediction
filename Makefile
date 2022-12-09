@@ -2,7 +2,7 @@
 # Author: DSCI 522 Group 19
 # Date: 2022-12-03
 
-all: result/eda_plot1_corr.png result/eda_plot2_dist.png result/car_classifier_tuning_analysis.csv result/car_hyperparameter_tuning_analysis.csv result/final_model.joblib result/final_model_score.txt doc/car_popularity_prediction_report.html doc/car_popularity_prediction_report.md
+all: doc/car_popularity_prediction_report.html doc/car_popularity_prediction_report.md
 
 # download raw data
 data/raw/raw_data.csv: src/download_data.py
