@@ -47,6 +47,8 @@ To 'clean' the repository, or remove the produced files, run this command:
 
 `docker run --rm --platform linux/amd64 -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home clean`
 
+The Docker image is hosted in [this repository](https://hub.docker.com/layers/ataciuk/dockerfile-practice/84645833/images/sha256-c577518c6545a101236cc7fec045322cf54efc5da4ce887fdf5aebfff3c74f43?context=repo).
+
 ## Using `make`
 
 Run the code block below to install the environment and activate it, before proceeding with the steps below. 
