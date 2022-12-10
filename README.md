@@ -160,6 +160,9 @@ You can also manually install the following packages:
     *  pandoc                    0.1.0
 * GNU make 4.2.1
 
+# Dependency diagram of the Makefile
+click for better visability
+![Alt text](Makefile.png)
 # License
 
 The Car Popularity Predictor materials here are licensed under [Creative Commons Attribution 4.0 Canada License (CC BY 4.0 CA).](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode)
