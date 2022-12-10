@@ -41,11 +41,13 @@ Next, clone the GitHUb repository.
 
 Finally, via navitgate to the root of the repository and run the following command: 
 
-`docker run --rm --platform linux/amd64 -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home all`
+`docker run --rm -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home all`
 
 To 'clean' the repository, or remove the produced files, run this command:
 
-`docker run --rm --platform linux/amd64 -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home clean`
+`docker run --rm -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home clean`
+
+Note: If you are using Apple silicon, you will need to add `--platform linux/amd64` after the `--rm`.
 
 The Docker image is hosted in [this repository](https://hub.docker.com/layers/ataciuk/dockerfile-practice/84645833/images/sha256-c577518c6545a101236cc7fec045322cf54efc5da4ce887fdf5aebfff3c74f43?context=repo).
 
