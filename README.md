@@ -33,14 +33,28 @@ To start off, fork the repo and clone the forked repo to your local machine by r
  git clone https://github.com/UBC-MDS/Car-Acceptability-Prediction.git 
 ```
 
-Then run the code block below to install the environment and activate it, before proceeding with the steps below. 
+## Using Docker:
+
+First, you will need to install [Docker](https://www.docker.com/). 
+
+Next, clone the GitHUb repository.
+
+Finally, via navitgate to the root of the repository and run the following command: 
+
+`docker run --rm --platform linux/amd64 -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home all`
+
+To 'clean' the repository, or remove the produced files, run this command:
+
+`docker run --rm --platform linux/amd64 -v /$(pwd):/home ataciuk/dockerfile-practice:84645833 make -C /home clean`
+
+## Using `make`
+
+Run the code block below to install the environment and activate it, before proceeding with the steps below. 
 
 ```
 conda env create -f env522car.yaml
 conda activate 522env
 ```
-
-## using `make`
 
 To reproduce the analysis, run the command at the root directory.
 
@@ -54,7 +68,14 @@ To reset and redo the analysis from beginning, run the command at the root direc
 make clean
 ```
 
-## without using `make`
+## Running scripts individually
+
+Run the code block below to install the environment and activate it, before proceeding with the steps below. 
+
+```
+conda env create -f env522car.yaml
+conda activate 522env
+```
 
 1. Using `docopt` in Python to download data file from external URL 
 
@@ -96,6 +117,15 @@ Rscript -e "rmarkdown::render('doc/car_popularity_prediction_report.Rmd')"
 
 The conda environment, called `env522car.yaml`, can be found in the root directory.
 
+Activate it by running: 
+
+```
+conda env create -f env522car.yaml
+conda activate 522env
+```
+
+You can also manually install the following packages:
+
 * Python 3.10.6 and Python Packages:
     *  docopt-ng                 0.8.1 
     *  requests                  2.28.1 
@@ -103,7 +133,7 @@ The conda environment, called `env522car.yaml`, can be found in the root directo
     *  altair                    4.2.0 
     *  altair_data_server        0.4.1
     *  joblib                    1.2.0
-    *  matplotlib                >=3.2.2
+    *  matplotlib                
     *  jsonschema                4.16
     *  selenium                  <4.3.0
     *  docopt-ng                 0.8.1
