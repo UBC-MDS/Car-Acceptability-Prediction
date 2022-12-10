@@ -161,7 +161,7 @@ You can also manually install the following packages:
 * GNU make 4.2.1
 
 # Dependency diagram of the Makefile
-click for better visability
+click the image for better visability
 ![Alt text](Makefile.png)
 # License
 
