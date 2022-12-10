@@ -1,11 +1,18 @@
+# Docker file for the car acceptability prediction project
+# Alex Taciuk, Dec, 2022
+
+# use continuumio/miniconda3 as the base image 
 FROM continuumio/miniconda3@sha256:977263e8d1e476972fddab1c75fe050dd3cd17626390e874448bd92721fd659b
 
+# put anaconda python in path
 ENV PATH="/opt/conda/bin:${PATH}"
 
+# install python packages via pip
 RUN pip install docopt-ng==0.8.1 \
     && pip install vl-convert-python==0.5.0 \
     && pip install docopt==0.6.2
 
+# update available softwares
 RUN apt-get update
 RUN apt-get install libfontconfig1-dev -y
 
@@ -19,7 +26,7 @@ RUN Rscript -e "install.packages('vctrs',repos = 'http://cran.us.r-project.org')
 RUN Rscript -e "install.packages('pandoc',repos = 'http://cran.us.r-project.org')"
 RUN apt-get install libxt6
 
-# install python packages
+# install python packages via conda
 RUN conda install -c conda-forge matplotlib -y 
 RUN conda install -c conda-forge eli5 -y 
 RUN conda install -c conda-forge shap -y 
